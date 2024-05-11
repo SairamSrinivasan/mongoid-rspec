@@ -13,7 +13,7 @@ class Article
 
   embeds_many :comments, cascade_callbacks: true, inverse_of: :article
   embeds_one :permalink, inverse_of: :linkable, class_name: 'Permalink'
-  belongs_to :author, class_name: 'User', inverse_of: :articles, index: true
+  belongs_to :author, class_name: 'User', inverse_of: :articles, index: true, touch: false
 
   validates :title, presence: true
 

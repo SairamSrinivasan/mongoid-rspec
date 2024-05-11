@@ -16,7 +16,7 @@ RSpec.describe 'Associations' do
   end
 
   describe Profile do
-    it { is_expected.to be_embedded_in(:user).as_inverse_of(:profile) }
+    it { is_expected.to be_embedded_in(:user).as_inverse_of(:profile).with_touch(false) }
   end
 
   describe Article do
@@ -35,7 +35,7 @@ RSpec.describe 'Associations' do
   end
 
   describe Permalink do
-    it { is_expected.to be_embedded_in(:linkable).as_inverse_of(:link) }
+    it { is_expected.to be_embedded_in(:linkable).as_inverse_of(:link).with_touch(false) }
   end
 
   describe Site do

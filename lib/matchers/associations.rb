@@ -119,6 +119,12 @@ module Mongoid
           self
         end
 
+        def with_touch(touch)
+          @association[:touch] = touch
+          @expectation_message << " which specifies touch as #{@association[:touch]}"
+          self
+        end
+
         def with_optional
           @association[:optional] = true
           @expectation_message << " which specifies optional as #{@association[:optional]}"
@@ -269,6 +275,15 @@ module Mongoid
               return false
             else
               @positive_result_message = "#{@positive_result_message} which set counter_cache"
+            end
+          end
+
+          if @association[:touch].present?
+            if metadata.options[:touch] != @association[:touch]
+              @negative_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch]}"
+              return false
+            else
+              @positive_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch]}"
             end
           end
 
