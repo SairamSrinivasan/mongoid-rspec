@@ -278,12 +278,12 @@ module Mongoid
             end
           end
 
-          if @association[:touch].present?
+          unless @association[:touch].nil?
             if metadata.options[:touch] != @association[:touch]
-              @negative_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch]}"
+              @negative_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch].inspect}"
               return false
             else
-              @positive_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch]}"
+              @positive_result_message = "#{@positive_result_message} which sets touch as #{metadata.options[:touch].inspect}"
             end
           end
 

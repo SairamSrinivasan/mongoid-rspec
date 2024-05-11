@@ -247,13 +247,18 @@ RSpec.describe User do
 end
 
 RSpec.describe Profile do
-  it { is_expected.to be_embedded_in(:user).as_inverse_of(:profile) }
+  it { is_expected.to be_embedded_in(:user).as_inverse_of(:profile).with_touch(false) }
 end
 
 RSpec.describe Article do
   it { is_expected.to belong_to(:author).of_type(User).as_inverse_of(:articles) }
   it { is_expected.to belong_to(:author).of_type(User).as_inverse_of(:articles).with_index }
   it { is_expected.to embed_many(:comments) }
+end
+
+# when the touch option is provided, then we can also verify that it is set.
+describe Permalink do
+  it { is_expected.to be_embedded_in(:linkable).as_inverse_of(:link).with_touch(false) } 
 end
 
 RSpec.describe Comment do
